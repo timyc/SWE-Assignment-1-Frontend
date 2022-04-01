@@ -3,20 +3,24 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import InputGroup from 'react-bootstrap/InputGroup';
-import FormControl from 'react-bootstrap/FormControl'
+import FormControl from 'react-bootstrap/FormControl';
+import UserPostsCommentsHelper from './UserPostsCommentsHelper';
 
 export default class UserProfileWidget extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            Comments: null
+            Comments: null,
+            selfEmail: '',
+            selfBody: '',
+            selfTitle: '',
         };
     }
 
-    componentDidUpdate(prevProps) {
+    /*componentDidUpdate(prevProps) {
         if (this.props.PID !== prevProps.PID)
             this.fetchComments();
-    }
+    }*/
 
     componentDidMount() {
         this.fetchComments();
@@ -32,26 +36,41 @@ export default class UserProfileWidget extends Component {
         });
     }
 
+    addComment = async() => {
+        let temp = this.state.Comments;
+        let results = await fetch('https://jsonplaceholder.typicode.com/comments', {method: 'POST', body: JSON.stringify({
+            postId: this.props.PID,
+            name: this.state.selfTitle,
+            email: this.state.selfEmail,
+            body: this.state.selfBody
+        }), headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+          },
+        });
+        let data = await results.json();
+        console.log(data);
+        temp.push(data);
+        this.setState({
+            Comments: temp
+        });
+    }
+
     render() {
-        const list = this.state.Comments?.map(entry => (
-            <ListGroup.Item key={entry.id}>
-                <p>
-                    <b>{entry.name}</b><br />
-                    <small>{entry.body}</small>
-                </p>
-                From: {entry.email}<br />
-                <Button variant="danger">Delete</Button>
-            </ListGroup.Item>
+        let list = this.state.Comments?.map(entry => (
+            <UserPostsCommentsHelper key={entry.id} CID={entry.id} NAME={entry.name} BODY={entry.body} EMAIL={entry.email}/>
         ));
+        //console.log(this.state.Comments);
         return (
-            // Don't want to render anything initially, so check if the user is currently null
-            <Card id="commentsWidget" className="border-0">
+            <Card id="profileWidget" className="border-0">
                 <InputGroup className="mb-3">
-                    <FormControl
-                    placeholder="Post Comment"
-                    aria-label="Comment"
-                    />
-                    <Button variant="outline-secondary">
+                    <FormControl placeholder="Email Address" aria-label="Email" />
+                </InputGroup>
+                <InputGroup className="mb-3">
+                    <FormControl placeholder="Comment Title" aria-label="Title" />
+                </InputGroup>
+                <InputGroup className="mb-3">
+                    <FormControl as="textarea" aria-label="Your Comment" />
+                    <Button variant="outline-secondary" onClick={() => this.addComment()}>
                         Comment
                     </Button>
                 </InputGroup>

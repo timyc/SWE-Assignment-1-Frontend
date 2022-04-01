@@ -10,6 +10,7 @@ export default class UserProfileWidget extends Component {
         super(props);
         this.state = {
             Posts: null,
+            Query: ''
         };
     }
 
@@ -36,6 +37,16 @@ export default class UserProfileWidget extends Component {
         
     }
 
+    searchPosts() {
+        //console.log('searching');
+        window.find(this.state.Query);
+    }
+
+    updateQuery(event) {
+        const val = event.target.value;
+        this.setState({Query: val});
+    }
+
     render() {
         const list = this.state.Posts?.map(entry => (
             <UserPostsWidgetHelper key={entry.id} PID={entry.id} TITLE={entry.title} BODY={entry.body} USERID = {entry.userId} />
@@ -47,6 +58,12 @@ export default class UserProfileWidget extends Component {
                     <FormControl
                     placeholder="Search for posts"
                     aria-label="Search"
+                    onChange={event => {this.updateQuery(event)}}
+                    onKeyPress={event => {
+                            if (event.key === 'Enter') {
+                            this.searchPosts()
+                            }
+                        }}
                     />
                 </InputGroup>
                 <ListGroup>

@@ -24,9 +24,12 @@ export default class UserList extends Component {
     }
 
     render() {
+        //console.log(this.props.User)
+        let changeUser = this.props.User;
         const list = this.state.Data?.map(entry => (
-            <ListGroup.Item key={entry.id}>
-                {entry.id}. {entry.name}
+            <ListGroup.Item key={entry.id} data-bs-toggle="tooltip" data-bs-placement="right" 
+            title={"Username: " + entry.username +  "\nEmail: " + entry.email} action onClick = {() => changeUser(entry.id)}>
+                {entry.name}
             </ListGroup.Item>
         ));
         //const list = "test";

@@ -48,10 +48,31 @@ export default class UserProfileWidget extends Component {
           },
         });
         let data = await results.json();
-        console.log(data);
+        //console.log(data);
         temp.push(data);
         this.setState({
             Comments: temp
+        });
+    }
+
+    updateBody(event) {
+        const val = event.target.value;
+        this.setState({
+            selfBody: val
+        });
+    }
+
+    updateTitle(event) {
+        const val = event.target.value;
+        this.setState({
+            selfTitle: val
+        });
+    }
+
+    updateEmail(event) {
+        const val = event.target.value;
+        this.setState({
+            selfEmail: val
         });
     }
 
@@ -63,13 +84,13 @@ export default class UserProfileWidget extends Component {
         return (
             <Card id="profileWidget" className="border-0">
                 <InputGroup className="mb-3">
-                    <FormControl placeholder="Email Address" aria-label="Email" />
+                    <FormControl placeholder="Email Address" aria-label="Email" onChange = {event => this.updateEmail(event)} />
                 </InputGroup>
                 <InputGroup className="mb-3">
-                    <FormControl placeholder="Comment Title" aria-label="Title" />
+                    <FormControl placeholder="Comment Title" aria-label="Title" onChange = {event => this.updateTitle(event)} />
                 </InputGroup>
                 <InputGroup className="mb-3">
-                    <FormControl as="textarea" aria-label="Your Comment" />
+                    <FormControl as="textarea" aria-label="Your Comment" onChange = {event => this.updateBody(event)} />
                     <Button variant="outline-secondary" onClick={() => this.addComment()}>
                         Comment
                     </Button>

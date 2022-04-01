@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {useNavigate} from 'react-router-dom';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 export default class UserList extends Component {
@@ -25,10 +26,9 @@ export default class UserList extends Component {
 
     render() {
         //console.log(this.props.User)
-        let changeUser = this.props.User;
         const list = this.state.Data?.map(entry => (
             <ListGroup.Item key={entry.id} data-bs-toggle="tooltip" data-bs-placement="right" 
-            title={"Username: " + entry.username +  "\nEmail: " + entry.email} action onClick = {() => changeUser(entry.id)}>
+            title={"Username: " + entry.username +  "\nEmail: " + entry.email} action onClick = {() => this.props.navigate("/user/" + entry.id)}>
                 {entry.name}
             </ListGroup.Item>
         ));

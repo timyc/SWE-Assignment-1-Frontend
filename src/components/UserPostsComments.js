@@ -27,13 +27,18 @@ export default class UserProfileWidget extends Component {
     }
 
     fetchComments = async() => {
-        let pid = this.props.PID;
-        let results = await fetch('https://jsonplaceholder.typicode.com/comments?postId=' + pid);
-        let data = await results.json();
-        //console.log(data)
-        this.setState({
-            Comments: data
-        });
+        try {
+            let pid = this.props.PID;
+            let results = await fetch('https://jsonplaceholder.typicode.com/comments?postId=' + pid);
+            let data = await results.json();
+            //console.log(data)
+            this.setState({
+                Comments: data
+            });
+        } catch (e) {
+            alert(e);
+        }
+        
     }
 
     addComment = async() => {

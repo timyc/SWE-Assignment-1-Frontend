@@ -14,9 +14,9 @@ export default class UserProfileWidget extends Component {
             this.fetchProfile();
     }
 
-    /*componentDidMount() {
+    componentDidMount() {
         this.fetchProfile();
-    }*/
+    }
 
     fetchProfile = async() => {
         //console.log(this.props.User);

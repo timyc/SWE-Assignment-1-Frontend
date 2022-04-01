@@ -2,7 +2,6 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Header from './Header';
-import Footer from './Footer';
 import UserList from './UserList';
 import UserDetailPage from './UserDetailPage';
 import React from 'react';
@@ -33,7 +32,6 @@ export default class App extends React.Component {
             <UserDetailPage User={this.state.currentUser} />
           </Col>
         </Row>
-        <Footer />
       </Container>
     );
   }

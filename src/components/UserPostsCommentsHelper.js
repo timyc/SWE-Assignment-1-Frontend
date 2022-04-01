@@ -11,8 +11,13 @@ export default class UserProfileWidget extends Component {
     }
 
     deleteSelf() {
-        this.setState({Deleted: !this.state.Deleted});
-        fetch('https://jsonplaceholder.typicode.com/comments?id=' + this.props.CID, {method: 'DELETE'})
+        try {
+            this.setState({Deleted: !this.state.Deleted});
+            fetch('https://jsonplaceholder.typicode.com/comments/' + this.props.CID, {method: 'DELETE'})
+        } catch (e) {
+            alert('Failed to delete comment');
+        }
+        
     }
 
     render() {

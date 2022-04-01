@@ -13,14 +13,14 @@ export default class UserAlbumPhotos extends Component {
 
     componentDidUpdate(prevProps) {
         if (this.props.AID !== prevProps.AID)
-            this.fetchComments();
+            this.fetchPhotos();
     }
 
     componentDidMount() {
-        this.fetchComments();
+        this.fetchPhotos();
     }
 
-    fetchComments = async() => {
+    fetchPhotos = async() => {
         let aid = this.props.AID;
         let results = await fetch('https://jsonplaceholder.typicode.com/photos?albumId=' + aid);
         let data = await results.json();
@@ -35,7 +35,6 @@ export default class UserAlbumPhotos extends Component {
             <Figure.Image key={entry.id} src={entry.thumbnailUrl}/>
         ));
         return (
-            // Don't want to render anything initially, so check if the user is currently null
             <Card id="profileWidget" className="border-0">
                 <Figure>
                     {list}

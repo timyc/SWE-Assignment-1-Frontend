@@ -32,7 +32,6 @@ export default class UserListSingle extends Component {
 
     render() {
         //console.log(this.props.User)
-        let changeUser = this.props.User;
         const list = this.state.Data?.map(entry => (
             <OverlayTrigger
                 key={entry.id}

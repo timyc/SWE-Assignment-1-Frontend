@@ -1,13 +1,41 @@
+import React, {Component} from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
 
-function UserList() {
-    return (
-        <ListGroup>
-            <ListGroup.Item>
-                thing 1
+export default class UserList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            Data: null
+        };
+    }
+
+    componentDidMount() {
+        this.fetchUsers();
+    }
+
+    fetchUsers = async() => {
+        let results = await fetch('https://jsonplaceholder.typicode.com/users');
+        
+        let data = await results.json();
+        //console.log(data)
+        this.setState({
+            Data: data
+        });
+    }
+
+    render() {
+        const list = this.state.Data?.map(entry => (
+            <ListGroup.Item key={entry.id}>
+                {entry.id}. {entry.name}
             </ListGroup.Item>
-        </ListGroup>
-    );
+        ));
+        //const list = "test";
+        return (
+            // I should use ListGroups which shows the customized UserDetailPage onClick
+            <ListGroup>
+                {list}
+            </ListGroup>
+        );
+    }
 }
 
-export default UserList

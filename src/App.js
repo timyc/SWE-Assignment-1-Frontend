@@ -26,10 +26,10 @@ export default class App extends React.Component {
         <Header />
         {/* App will have 1 row with 2 columns (userlist, user detail page) */}
         <Row>
-          <Col>
+          <Col sm={4}>
             <UserList User={this.changeUser} />
           </Col>
-          <Col>
+          <Col sm={8}>
             <UserDetailPage User={this.state.currentUser} />
           </Col>
         </Row>

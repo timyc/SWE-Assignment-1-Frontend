@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
 import ListGroup from 'react-bootstrap/ListGroup';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl'
@@ -34,19 +35,25 @@ export default class UserProfileWidget extends Component {
     render() {
         const list = this.state.Comments?.map(entry => (
             <ListGroup.Item key={entry.id}>
-                <h3>{entry.title}</h3>
-                <p>{entry.body}</p>
-                
+                <p>
+                    <b>{entry.name}</b><br />
+                    <small>{entry.body}</small>
+                </p>
+                From: {entry.email}<br />
+                <Button variant="danger">Delete</Button>
             </ListGroup.Item>
         ));
         return (
             // Don't want to render anything initially, so check if the user is currently null
-            <Card id="profileWidget">
+            <Card id="commentsWidget" className="border-0">
                 <InputGroup className="mb-3">
                     <FormControl
                     placeholder="Post Comment"
                     aria-label="Comment"
                     />
+                    <Button variant="outline-secondary">
+                        Comment
+                    </Button>
                 </InputGroup>
                 <ListGroup>
                     {list}

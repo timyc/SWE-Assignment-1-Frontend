@@ -37,7 +37,7 @@ export default class UserProfileWidget extends Component {
         ));
         return (
             // Don't want to render anything initially, so check if the user is currently null
-            <Card id="profileWidget">
+            <Card id="profileWidget" className="border-0">
                 <InputGroup className="mb-3">
                     <FormControl
                     placeholder="Search for posts"

@@ -20,13 +20,18 @@ export default class UserProfileWidget extends Component {
 
     fetchProfile = async() => {
         //console.log(this.props.User);
-        let user = this.props.User;
-        let results = await fetch('https://jsonplaceholder.typicode.com/users/' + user);
-        let data = await results.json();
-        // https://jsonplaceholder.typicode.com/comments?postId=
-        this.setState({
-            Data: data
-        });
+        try {
+            let user = this.props.User;
+            let results = await fetch('https://jsonplaceholder.typicode.com/users/' + user);
+            let data = await results.json();
+            // https://jsonplaceholder.typicode.com/comments?postId=
+            this.setState({
+                Data: data
+            });
+        } catch (e) {
+            alert(e);
+        }
+        
     }
 
     render() {

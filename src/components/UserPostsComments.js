@@ -42,22 +42,27 @@ export default class UserProfileWidget extends Component {
     }
 
     addComment = async() => {
-        let temp = this.state.Comments;
-        let results = await fetch('https://jsonplaceholder.typicode.com/comments', {method: 'POST', body: JSON.stringify({
-            postId: this.props.PID,
-            name: this.state.selfTitle,
-            email: this.state.selfEmail,
-            body: this.state.selfBody
-        }), headers: {
-            'Content-type': 'application/json; charset=UTF-8',
-          },
-        });
-        let data = await results.json();
-        //console.log(data);
-        temp.push(data);
-        this.setState({
-            Comments: temp
-        });
+        try {
+            let temp = this.state.Comments;
+            let results = await fetch('https://jsonplaceholder.typicode.com/comments', {method: 'POST', body: JSON.stringify({
+                postId: this.props.PID,
+                name: this.state.selfTitle,
+                email: this.state.selfEmail,
+                body: this.state.selfBody
+            }), headers: {
+                'Content-type': 'application/json; charset=UTF-8',
+            },
+            });
+            let data = await results.json();
+            //console.log(data);
+            temp.push(data);
+            this.setState({
+                Comments: temp
+            });
+        } catch (e) {
+            alert(e);
+        }
+        
     }
 
     updateBody(event) {

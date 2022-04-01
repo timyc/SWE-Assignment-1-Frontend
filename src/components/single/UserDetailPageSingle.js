@@ -16,7 +16,7 @@ export default class UserDetailPage extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        if (this.props.User.id != prevProps.User.id) {
+        if (this.props.User.id !== prevProps.User.id) {
             this.setState({pOpen: false});
             this.setState({aOpen: false});
         }

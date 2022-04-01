@@ -14,13 +14,18 @@ export default class UserList extends Component {
     }
 
     fetchUsers = async() => {
-        let results = await fetch('https://jsonplaceholder.typicode.com/users');
+        try {
+            let results = await fetch('https://jsonplaceholder.typicode.com/users');
+            
+            let data = await results.json();
+            //console.log(data)
+            this.setState({
+                Data: data
+            });
+        } catch (e) {
+            alert(e);
+        }
         
-        let data = await results.json();
-        //console.log(data)
-        this.setState({
-            Data: data
-        });
     }
 
     render() {

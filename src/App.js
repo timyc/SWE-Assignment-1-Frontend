@@ -3,13 +3,9 @@ import UserDetailPageSingle from './components/single/UserDetailPageSingle';
 import OnePager from './components/OnePager';
 import RouterHelper from './components/RouterHelper';
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     //console.log(this.state.currentUser)
     return (

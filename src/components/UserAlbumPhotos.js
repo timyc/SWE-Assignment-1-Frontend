@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import Card from 'react-bootstrap/Card';
 import Figure from 'react-bootstrap/Figure';
-import ListGroup from 'react-bootstrap/ListGroup';
 
 export default class UserAlbumPhotos extends Component {
     constructor(props) {

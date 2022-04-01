@@ -61,7 +61,12 @@ export default class UserProfileWidgetHelper extends Component {
     }
 
     deletePost() {
-
+        try {
+            this.setState({Deleted: !this.state.Deleted});
+            fetch('https://jsonplaceholder.typicode.com/posts/' + this.props.PID, {method: 'DELETE'})
+        } catch (e) {
+            alert('Failed to delete comment');
+        }
     }
 
     render() {
@@ -70,6 +75,7 @@ export default class UserProfileWidgetHelper extends Component {
         } else {
             return (
                 <ListGroup.Item key={this.props.PID}>
+                    <CloseButton onClick={() => this.deletePost()} />
                     <InputGroup className="mb-3">
                         <FormControl value={this.state.SelfTitle} onChange={event => this.updateTitle(event)} />
                     </InputGroup>

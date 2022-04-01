@@ -17,12 +17,17 @@ export default class UserAlbumsWidget extends Component {
     }
 
     fetchAlbums = async() => {
-        let user = this.props.User;
-        let results = await fetch('https://jsonplaceholder.typicode.com/albums?userId=' + user);
-        let data = await results.json();
-        this.setState({
-            Albums: data
-        });
+        try {
+            let user = this.props.User;
+            let results = await fetch('https://jsonplaceholder.typicode.com/albums?userId=' + user);
+            let data = await results.json();
+            this.setState({
+                Albums: data
+            });
+        } catch (e) {
+            alert(e);
+        }
+        
     }
 
     render() {

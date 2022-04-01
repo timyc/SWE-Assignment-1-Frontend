@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import ListGroup from 'react-bootstrap/ListGroup';
 import InputGroup from 'react-bootstrap/InputGroup';
 import FormControl from 'react-bootstrap/FormControl';
-import UserPostsComments from '../UserPostsComments';
+import UserPostsWidgetHelper from '../UserPostsWidgetHelper';
 
 export default class UserProfileWidget extends Component {
     constructor(props) {
@@ -23,21 +23,22 @@ export default class UserProfileWidget extends Component {
     }
 
     fetchPosts = async() => {
-        let user = this.props.User;
-        let results = await fetch('https://jsonplaceholder.typicode.com/posts?userId=' + user);
-        let data = await results.json();
-        this.setState({
-            Posts: data
-        });
+        try {
+            let user = this.props.User;
+            let results = await fetch('https://jsonplaceholder.typicode.com/posts?userId=' + user);
+            let data = await results.json();
+            this.setState({
+                Posts: data
+            });
+        } catch (e) {
+            alert(e);
+        }
+        
     }
 
     render() {
         const list = this.state.Posts?.map(entry => (
-            <ListGroup.Item key={entry.id}>
-                <h3>{entry.title}</h3>
-                <p>{entry.body}</p>
-                <UserPostsComments PID = {entry.id}/>
-            </ListGroup.Item>
+            <UserPostsWidgetHelper key={entry.id} PID={entry.id} TITLE={entry.title} BODY={entry.body} USERID = {entry.userId} />
         ));
         return (
             // Don't want to render anything initially, so check if the user is currently null
